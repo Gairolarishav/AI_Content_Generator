@@ -124,4 +124,19 @@ def videoideas(request):
             return render(request, 'video_ideas.html', {'prompt': error_message})
      return render(request,'video_ideas.html')
 
+def LanguageTranslator(request):
+     if request.method == 'POST':
+        prompt = request.POST.get('text', '').strip()
+        langauge = request.POST.get('language', '').strip()
+
+        if prompt and langauge:
+            openAIAnswer = ai_genrator.LanguageTranslator(prompt,langauge)
+            openAIAnswer = openAIAnswer.replace('\n', '<br>')
+            return render(request, 'translation.html', {'openAIAnswer': openAIAnswer, 'prompt': prompt})
+        else:
+            # Handle the case when the product title is empty
+            error_message = "Please add something in the input section"
+            return render(request, 'translation.html', {'prompt': error_message})
+     return render(request,'translation.html')
+
 

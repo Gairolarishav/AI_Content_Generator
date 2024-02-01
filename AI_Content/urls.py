@@ -11,4 +11,5 @@ urlpatterns = [
     path('tweet_ideas/',views.tweet,name='tweet'),
     path('video_description/',views.videodesc,name='videodesc'),
     path('video_ideas/',views.videoideas,name='videoideas'),
+    path('language_translator/',views.LanguageTranslator,name='translator'),
 ]

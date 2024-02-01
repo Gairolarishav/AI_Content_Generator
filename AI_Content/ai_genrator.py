@@ -166,3 +166,23 @@ def generateVideoIdeas(prompt):
     # reply = json.loads(reply)
     return reply
 
+def LanguageTranslator(prompt,language):
+    translator = {
+      'model' : 'gpt-3.5-turbo',
+      'messages': [{'role': 'user' , 'content': f"Translate {prompt} into {language}"}],
+      'temperature' : 1.0 ,
+      'top_p': 1.0,
+      'n': 1 ,
+      'stream': False,
+      'presence_penalty' : 0,
+      'frequency_penalty' : 0
+    }
+    headers = {
+      'Content-Type' : 'application/json' ,
+      'Authorization' : f"Bearer {openai.api_key}"}
+
+    response = requests.post(URL,headers = headers,json = translator)
+    reply = response.json()['choices'][0]['message']['content']
+    # reply = json.loads(reply)
+    return reply
+
